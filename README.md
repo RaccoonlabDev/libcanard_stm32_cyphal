@@ -74,7 +74,7 @@ It is nice to fill GetInfo with an information specific to your application:
 
 |||
 |-|-|
-| Software version | Defined on the compile time with `APP_VERSION_MAJOR` define. |
+| Software version | Defined on the compile time with `APP_VERSION_MAJOR` and `APP_VERSION_MINOR` defines. |
 | Hardware version | Should be defined on the initialization time. |
 | Certificate of authenticity | Not supported by this example yet. |
 | Unique ID | It is expected to provide `HAL_GetUIDw0`, `HAL_GetUIDw1` and `HAL_GetUIDw2`. By default, it is provided by STM32 HAL. |

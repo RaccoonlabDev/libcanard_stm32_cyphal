@@ -8,13 +8,22 @@
 #include "params.hpp"
 #include "algorithms.hpp"
 #include "storage.h"
-#include "git_software_version.h"
 
 #ifndef GIT_HASH
-    #define GIT_HASH 0xBADC0FFEEFFF
+    #define GIT_HASH 0xBADC0FFEE000
 #endif
-#if GIT_HASH == 0xBADC0FFEEFFF
-    #pragma message "GIT_HASH is not provided"
+#if GIT_HASH == 0xBADC0FFEE000
+    #warning "GIT_HASH has not been provided!"
+#endif
+
+#ifndef APP_VERSION_MAJOR
+    #warning "APP_VERSION_MAJOR has been assigned to 0 by default."
+    #define APP_VERSION_MAJOR   0
+#endif
+
+#ifndef APP_VERSION_MINOR
+    #warning "APP_VERSION_MINOR has been assigned to 0 by default."
+    #define APP_VERSION_MINOR   0
 #endif
 
 namespace cyphal {
