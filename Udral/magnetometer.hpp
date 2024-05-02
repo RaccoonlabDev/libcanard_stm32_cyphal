@@ -6,15 +6,15 @@
 #define UDRAL_MAGNETOMETER_HPP_
 
 #include "cyphal.hpp"
-#include "uavcan/si/sample/magnetic_field_strength/Vector3_1_0.h"
+#include "uavcan/si/sample/magnetic_field_strength/Vector3_1_1.h"
 
-namespace cyphal {
+namespace cyphal::udral {
 
 struct MagneticFieldPublisher: public CyphalPublisher {
-    MagneticFieldPublisher(Cyphal* driver_, CanardPortID port_id) : CyphalPublisher(driver_, port_id) {};
-    void publish(const uavcan_si_sample_magnetic_field_strength_Vector3_1_0& msg);
+    MagneticFieldPublisher() : CyphalPublisher(Cyphal::get_instance(), 65535) {}
+    void publish(const uavcan_si_sample_magnetic_field_strength_Vector3_1_1& msg);
 };
 
-}  // namespace cyphal
+}  // namespace cyphal::udral
 
 #endif  // UDRAL_MAGNETOMETER_HPP_
