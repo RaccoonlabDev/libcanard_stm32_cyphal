@@ -21,11 +21,11 @@ namespace cyphal {
 
 typedef struct{
     FDCAN_HandleTypeDef* handler;
-    FDCAN_TxHeaderTypeDef tx_header;
-    uint8_t rx_buf[8];
-    size_t err_counter;
-    size_t tx_counter;
-    size_t rx_counter;
+    FDCAN_TxHeaderTypeDef tx_header{};
+    uint8_t rx_buf[8] = {};
+    size_t err_counter{0};
+    size_t tx_counter{0};
+    size_t rx_counter{0};
 } CanDriver;
 
 struct CanFrame {
@@ -167,6 +167,7 @@ uint8_t CyphalTransportCan::get_rx_queue_size() {
 
 
 void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs) {
+    (void)RxFifo0ITs;
     FDCAN_RxHeaderTypeDef rx_header;
     const uint8_t fifo_size = HAL_FDCAN_GetRxFifoFillLevel(&hfdcan1, FDCAN_RX_FIFO0);
     cyphal::CanFrame frame;
