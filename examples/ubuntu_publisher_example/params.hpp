@@ -8,7 +8,7 @@
 #include "storage.h"
 
 enum IntParamsIndexes : ParamIndex_t {
-    PARAM_NODE_ID,
+    PARAM_UAVCAN_NODE_ID,
     FEEDBACK,
 
     INTEGER_PARAMS_AMOUNT

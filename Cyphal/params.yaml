@@ -1,7 +1,7 @@
 uavcan.node.id:
   note: Defines a node-ID. Allowed values [0,127].
   type: Integer
-  enum: PARAM_NODE_ID
+  enum: PARAM_UAVCAN_NODE_ID
   flags: mutable
   default: 50
   min: 0
