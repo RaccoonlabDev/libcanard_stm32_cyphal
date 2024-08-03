@@ -16,7 +16,7 @@ uint32_t HAL_GetTick() {
 
 int main (int argc, char *argv[]) {
     cyphal::Cyphal cyphal;
-    int init_res = cyphal.init();
+    int init_res = cyphal.init(42);
     if (init_res < 0) {
         std::cout << "Error: ";
         switch (init_res) {

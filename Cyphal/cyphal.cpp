@@ -23,12 +23,13 @@ static uint32_t getCurrentMicroseconds();
 
 O1HeapInstance* Cyphal::my_allocator;
 
-int Cyphal::init() {
+int Cyphal::init(uint8_t id) {
+    node_id = id;
+
     heartbeat_pub.msg.health.value = uavcan_node_Health_1_0_NOMINAL;
     heartbeat_pub.msg.mode.value = uavcan_node_Mode_1_0_OPERATIONAL;
     heartbeat_pub.msg.vendor_specific_status_code = 0;
 
-    node_id = static_cast<uint8_t>(paramsGetIntegerValue(IntParamsIndexes::PARAM_NODE_ID));
     if (node_id == 0 || node_id > 126) {
         node_id = 42;
     }

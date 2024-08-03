@@ -36,7 +36,7 @@ public:
               execute_cmd_response(this) {
         _instance = this;
     };
-    int init();
+    int init(uint8_t node_id);
     void process();
     int32_t push(CanardTransferMetadata* metadata, size_t payload_size, const uint8_t* payload);
     int8_t subscribe(CyphalSubscriber* sub_info, size_t size, CanardTransferKind kind);
