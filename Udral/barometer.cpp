@@ -3,7 +3,6 @@
 /// Author: Dmitry Ponomarev <ponomarevda96@gmail.com>
 
 #include "barometer.hpp"
-#include "main.h"
 #include "cyphal.hpp"
 #include "params.hpp"
 

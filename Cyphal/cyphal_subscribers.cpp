@@ -4,10 +4,10 @@
 
 #include "cyphal_subscribers.hpp"
 #include "cyphal.hpp"
-#include "main.h"
 #include "params.hpp"
 #include "algorithms.hpp"
 #include "storage.h"
+#include "platform_specific.h"
 
 #ifndef GIT_HASH
     #define GIT_HASH 0xBADC0FFEE000
@@ -56,24 +56,7 @@ void NodeGetInfoSubscriber::init() {
     get_info_response.hardware_version.minor = hw_version.minor;
     get_info_response.certificate_of_authenticity.count = 0;
 
-    auto uid_u32 = HAL_GetUIDw0();
-    get_info_response.unique_id[0] = uid_u32 & 0xFF;
-    get_info_response.unique_id[1] = (uid_u32 >> 8) & 0xFF;
-    get_info_response.unique_id[2] = (uid_u32 >> 16) & 0xFF;
-    get_info_response.unique_id[3] = (uid_u32 >> 24) & 0xFF;
-
-    uid_u32 = HAL_GetUIDw1();
-    get_info_response.unique_id[4] = uid_u32 & 0xFF;
-    get_info_response.unique_id[5] = (uid_u32 >> 8) & 0xFF;
-    get_info_response.unique_id[6] = (uid_u32 >> 16) & 0xFF;
-    get_info_response.unique_id[7] = (uid_u32 >> 24) & 0xFF;
-
-    uid_u32 = HAL_GetUIDw2();
-    get_info_response.unique_id[8] = uid_u32 & 0xFF;
-    get_info_response.unique_id[9] = (uid_u32 >> 8) & 0xFF;
-    get_info_response.unique_id[10] = (uid_u32 >> 16) & 0xFF;
-    get_info_response.unique_id[11] = (uid_u32 >> 24) & 0xFF;
-
+    platformSpecificReadUniqueID(get_info_response.unique_id);
     updateNodeName();
 }
 
@@ -135,8 +118,7 @@ void ExecuteCommandSubscriber::callback(const CanardRxTransfer& transfer) {
 
     switch (msg.command) {
         case uavcan_node_ExecuteCommand_Request_1_0_COMMAND_RESTART:
-            HAL_NVIC_SystemReset();
-            cmd_response.status = uavcan_node_ExecuteCommand_Response_1_0_STATUS_SUCCESS;
+            cmd_response.status = platformSpecificRequestRestart() ? 0 : 1;
             break;
 
         case uavcan_node_ExecuteCommand_Request_1_0_COMMAND_STORE_PERSISTENT_STATES:

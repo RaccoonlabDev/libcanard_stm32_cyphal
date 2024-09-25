@@ -4,7 +4,6 @@
 
 #include "cyphal_publishers.hpp"
 #include "cyphal.hpp"
-#include "main.h"
 #include "storage.h"
 
 namespace cyphal {
@@ -101,7 +100,7 @@ size_t PortListPublisher::uavcan_node_port_List_1_0_create() {
 }
 
 void PortListPublisher::publish() {
-    auto crnt_time_ms = HAL_GetTick();
+    auto crnt_time_ms = platformSpecificGetTimeMs();
     if (crnt_time_ms < next_pub_time_ms && !driver->ports_updated) {
         return;
     }

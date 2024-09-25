@@ -3,7 +3,6 @@
 /// Author: Dmitry Ponomarev <ponomarevda96@gmail.com>
 
 #include "rangefinder.hpp"
-#include "main.h"
 
 namespace cyphal {
 

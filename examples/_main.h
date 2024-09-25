@@ -7,10 +7,4 @@
 
 #include <stdint.h>
 
-uint32_t HAL_GetTick();
-uint32_t HAL_GetUIDw0();
-uint32_t HAL_GetUIDw1();
-uint32_t HAL_GetUIDw2();
-void HAL_NVIC_SystemReset();
-
 #endif  // UBUNTU_MAIN_H_

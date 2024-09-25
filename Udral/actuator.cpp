@@ -3,7 +3,6 @@
 /// Author: Dmitry Ponomarev <ponomarevda96@gmail.com>
 
 #include "actuator.hpp"
-#include "main.h"
 #include "params.hpp"
 
 namespace cyphal {
@@ -61,7 +60,7 @@ int8_t ReadinessSubscriber::init() {
 }
 
 uint8_t ReadinessSubscriber::get_readiness() {
-    if (_last_recv_time_ms == 0 || HAL_GetTick() > _last_recv_time_ms + 500) {
+    if (_last_recv_time_ms == 0 || platformSpecificGetTimeMs() > _last_recv_time_ms + 500) {
         return reg_udral_service_common_Readiness_0_1_SLEEP;
     }
 
@@ -72,7 +71,7 @@ void ReadinessSubscriber::callback(const CanardRxTransfer& transfer) {
     auto payload = static_cast<const uint8_t*>(transfer.payload);
     size_t payload_len = transfer.payload_size;
     reg_udral_service_common_Readiness_0_1_deserialize_(&msg, payload, &payload_len);
-    _last_recv_time_ms = HAL_GetTick();
+    _last_recv_time_ms = platformSpecificGetTimeMs();
 }
 
 }  // namespace cyphal
