@@ -7,7 +7,7 @@
 #include <chrono>
 #include <thread>
 
-uint32_t HAL_GetTick() {
+uint32_t platformSpecificGetTimeMs() {
     static auto time_start = std::chrono::steady_clock::now();
     auto time_now = std::chrono::steady_clock::now();
     auto elapsed_time_ms = std::chrono::duration_cast<std::chrono::milliseconds>(time_now - time_start).count();

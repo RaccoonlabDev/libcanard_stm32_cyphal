@@ -7,12 +7,11 @@
 #include <chrono>
 #include <thread>
 #include "reg/udral/service/actuator/common/Feedback_0_1.h"
-#include "main.h"
 #include "params.hpp"
 
 void FeedbackPublisher::process() {
     static uint32_t prev_pub_time_ms = 1000;
-    uint32_t crnt_time_ms = HAL_GetTick();
+    uint32_t crnt_time_ms = platformSpecificGetTimeMs();
     if (crnt_time_ms < prev_pub_time_ms + 1000) {
         return;
     }

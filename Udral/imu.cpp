@@ -3,7 +3,6 @@
 /// Author: Dmitry Ponomarev <ponomarevda96@gmail.com>
 
 #include "imu.hpp"
-#include "main.h"
 #include "params.hpp"
 
 namespace cyphal {

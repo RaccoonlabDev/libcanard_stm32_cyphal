@@ -3,7 +3,6 @@
 /// Author: Dmitry Ponomarev <ponomarevda96@gmail.com>
 
 #include "battery.hpp"
-#include "main.h"
 #include "params.hpp"
 
 #define WH_TO_JOULE     3600
@@ -16,7 +15,7 @@ void UdralBatteryPublisher::set_nominal_data(float design_capacity_ah, uint64_t 
 }
 
 void UdralBatteryPublisher::publish(float voltage, float current, float temperature_kelvin, float full_capacity_ah, float remaining_capacity_ah) {
-    uint32_t crnt_time_ms = HAL_GetTick();
+    uint32_t crnt_time_ms = platformSpecificGetTimeMs();
 
     if (crnt_time_ms > _next_source_pub_time_ms) {
         _next_source_pub_time_ms = crnt_time_ms + 10;

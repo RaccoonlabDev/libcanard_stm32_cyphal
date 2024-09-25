@@ -5,7 +5,7 @@
 #include "cyphal_transport_can.hpp"
 #include <string.h>
 #include "socketcan.h"
-#include "main.h"
+#include "platform_specific.h"
 
 namespace cyphal {
 
@@ -47,7 +47,7 @@ bool CyphalTransportCan::transmit(const CanardTxQueueItem* transfer) {
         return false;
     }
 
-    const uint64_t current_time_us = HAL_GetTick() * 1000;
+    const uint64_t current_time_us = platformSpecificGetTimeMs() * 1000;
     int16_t res = socketcanPush(_instance, &transfer->frame, current_time_us);
     return (res > 0) ? true : false;
 }

@@ -6,6 +6,7 @@
 #include <string.h>
 #include "bxcan.h"
 #include "main.h"
+#include "platform_specific.h"
 
 namespace cyphal {
 
@@ -42,7 +43,7 @@ bool CyphalTransportCan::transmit(const CanardTxQueueItem* transfer) {
         return false;
     }
 
-    const uint64_t current_time = HAL_GetTick() * 1000;
+    const uint64_t current_time = platformSpecificGetTimeMs() * 1000;
     const uint64_t deadline = current_time + 100 * 1000;
     const uint8_t iface_index = 0;
 

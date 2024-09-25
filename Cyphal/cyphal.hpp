@@ -9,6 +9,7 @@
 #include "cyphal_subscribers.hpp"
 #include "cyphal_registers.hpp"
 #include "cyphal_publishers.hpp"
+#include "platform_specific.h"
 #include "canard.h"
 #include "o1heap.h"
 #include "uavcan/node/GetInfo_1_0.h"

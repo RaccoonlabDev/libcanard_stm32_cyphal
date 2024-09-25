@@ -2,11 +2,13 @@
 /// Copyright (c) 2022 Dmitry Ponomarev.
 /// Author: Dmitry Ponomarev <ponomarevda96@gmail.com>
 
-#include <stdint.h>
+#include "platform_specific.h"
+#include <string.h>
 
-/// Functions below are auxiliary.
-/// You may provide their implementation outside if you need.
-__attribute__ ((weak)) uint32_t HAL_GetUIDw0() { return 0; }
-__attribute__ ((weak)) uint32_t HAL_GetUIDw1() { return 0; }
-__attribute__ ((weak)) uint32_t HAL_GetUIDw2() { return 0; }
-__attribute__ ((weak)) void HAL_NVIC_SystemReset() { }
+__attribute__((weak)) bool platformSpecificRequestRestart() {
+    return false;  // because not implemented
+}
+
+__attribute__((weak)) void platformSpecificReadUniqueID(uint8_t out_uid[16]) {
+    memset(out_uid, 0x00, 16);
+}

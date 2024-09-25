@@ -3,7 +3,6 @@
 /// Author: Dmitry Ponomarev <ponomarevda96@gmail.com>
 
 #include "compact_feedback.hpp"
-#include "main.h"
 #include "params.hpp"
 
 namespace zubax::telega {

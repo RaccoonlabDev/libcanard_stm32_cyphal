@@ -3,7 +3,6 @@
 /// Author: Dmitry Ponomarev <ponomarevda96@gmail.com>
 
 #include "cyphal.hpp"
-#include "main.h"
 #include "cyphal_subscribers.hpp"
 #include "cyphal_registers.hpp"
 #include "uavcan/node/Heartbeat_1_0.h"
@@ -18,7 +17,6 @@ static const constexpr size_t TX_QUEUE_FRAME_SIZE = 320;  ///< we need 314 bytes
 ///< wrappers
 static void* memAllocate(CanardInstance* const canard, const size_t amount);
 static void memFree(CanardInstance* const canard, void* const pointer);
-static uint32_t getCurrentMicroseconds();
 
 
 O1HeapInstance* Cyphal::my_allocator;
@@ -58,7 +56,7 @@ int Cyphal::init(uint8_t id) {
 
 void Cyphal::process() {
     // 1. spin recv
-    uint32_t crnt_time_ms = HAL_GetTick();
+    uint32_t crnt_time_ms = platformSpecificGetTimeMs();
     for (uint_fast8_t frame_idx = 0; frame_idx < transport.get_rx_queue_size(); frame_idx++) {
         CanardFrame rx_frame;
         if (transport.receive(&rx_frame)) {
@@ -132,7 +130,7 @@ void Cyphal::processReceivedTransfer([[maybe_unused]] const uint8_t redundant_in
 }
 
 bool Cyphal::isTxQueueItemFresh(const CanardTxQueueItem* ti) const {
-    return (0U == ti->tx_deadline_usec) || (ti->tx_deadline_usec > getCurrentMicroseconds());
+    return (0U == ti->tx_deadline_usec) || (ti->tx_deadline_usec > platformSpecificGetTimeMs());
 }
 
 void Cyphal::spinTransmit() {
@@ -200,9 +198,6 @@ static void* memAllocate(CanardInstance* const canard, const size_t amount) {
 static void memFree(CanardInstance* const canard, void* const pointer) {
     (void) canard;
     o1heapFree(Cyphal::my_allocator, pointer);
-}
-static uint32_t getCurrentMicroseconds() {
-    return HAL_GetTick();
 }
 
 }  // namespace cyphal
