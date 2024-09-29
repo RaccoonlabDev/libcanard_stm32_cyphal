@@ -2,11 +2,11 @@
 /// Copyright (c) 2022-2023 Dmitry Ponomarev.
 /// Author: Dmitry Ponomarev <ponomarevda96@gmail.com>
 
-#include "cyphal_transport_can.hpp"
+#include "cyphalNode/platform_specific.h"
+#include "cyphalNode/cyphal_transport_can.hpp"
 #include <string.h>
 #include "bxcan.h"
 #include "main.h"
-#include "platform_specific.h"
 
 namespace cyphal {
 
