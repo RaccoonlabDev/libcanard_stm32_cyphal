@@ -2,10 +2,10 @@
 /// Copyright (c) 2022-2023 Dmitry Ponomarev.
 /// Author: Dmitry Ponomarev <ponomarevda96@gmail.com>
 
-#include "cyphal_transport_can.hpp"
+#include "cyphalNode/cyphal_transport_can.hpp"
 #include <string.h>
+#include "cyphalNode/ring_buffer.hpp"
 #include "main.h"
-#include "ring_buffer.hpp"
 #include "params.hpp"
 
 #ifndef CYPHAL_NUM_OF_CAN_BUSES

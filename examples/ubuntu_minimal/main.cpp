@@ -3,7 +3,7 @@
 /// Author: Dmitry Ponomarev <ponomarevda96@gmail.com>
 
 #include <iostream>
-#include "cyphal.hpp"
+#include "cyphalNode/cyphal.hpp"
 #include <chrono>
 #include <thread>
 

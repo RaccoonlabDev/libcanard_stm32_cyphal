@@ -4,7 +4,7 @@ if(NOT libparamsPath)
     set(libparamsPath ${CMAKE_CURRENT_LIST_DIR}/Libs/libparams)
 endif()
 
-FILE(GLOB cyphalSources                         ${CMAKE_CURRENT_LIST_DIR}/Cyphal/*.cpp)
+FILE(GLOB cyphalSources                         ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp)
 FILE(GLOB libcanardSources                      ${CMAKE_CURRENT_LIST_DIR}/Libs/libcanard/libcanard/*.*)
 FILE(GLOB libparamsSources                      ${libparamsPath}/libparams/*.c)
 FILE(GLOB o1heapSources                         ${CMAKE_CURRENT_LIST_DIR}/Libs/o1heap/o1heap/*.c)
@@ -42,7 +42,7 @@ set(CYPHAL_SRC
     ${transportPlatformSpecificSources}
 )
 
-include_directories(${CMAKE_CURRENT_LIST_DIR}/Cyphal)
+include_directories(${CMAKE_CURRENT_LIST_DIR}/include)
 include_directories(${CMAKE_CURRENT_LIST_DIR}/Libs/libcanard/libcanard)
 include_directories(${libparamsPath}/libparams)
 include_directories(${CMAKE_CURRENT_LIST_DIR}/Libs/o1heap/o1heap)

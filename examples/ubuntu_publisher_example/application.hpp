@@ -5,7 +5,7 @@
 #ifndef UBUNTU_PUBLISHER_EXAMPLE_APPLICATION_HPP_
 #define UBUNTU_PUBLISHER_EXAMPLE_APPLICATION_HPP_
 
-#include "cyphal.hpp"
+#include "cyphalNode/cyphal.hpp"
 
 struct FeedbackPublisher: public cyphal::CyphalPublisher {
     FeedbackPublisher(cyphal::Cyphal* driver_) : cyphal::CyphalPublisher(driver_, 2100) {}
