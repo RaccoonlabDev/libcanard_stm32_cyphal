@@ -11,6 +11,32 @@ namespace cyphal {
 std::array<CyphalPublisher*, CyphalPublisher::MAX_PUB_NUM> CyphalPublisher::publishers;
 uint8_t CyphalPublisher::publishers_amount{0};
 
+CyphalPublisher::CyphalPublisher() : driver(Cyphal::get_instance()) {
+
+    transfer_metadata.priority = CanardPriorityNominal;
+    transfer_metadata.transfer_kind = CanardTransferKindMessage;
+    transfer_metadata.port_id = 65535;
+    transfer_metadata.remote_node_id = CANARD_NODE_ID_UNSET;
+    transfer_metadata.transfer_id = 0;
+
+    if (publishers_amount < MAX_PUB_NUM) {
+        publishers[publishers_amount] = this;
+        publishers_amount++;
+    }
+}
+
+CyphalPublisher::CyphalPublisher(Cyphal* driver_, CanardPortID port_id_) : driver(driver_) {
+    transfer_metadata.priority = CanardPriorityNominal;
+    transfer_metadata.transfer_kind = CanardTransferKindMessage;
+    transfer_metadata.port_id = port_id_;
+    transfer_metadata.remote_node_id = CANARD_NODE_ID_UNSET;
+    transfer_metadata.transfer_id = 0;
+
+    if (publishers_amount < MAX_PUB_NUM) {
+        publishers[publishers_amount] = this;
+        publishers_amount++;
+    }
+}
 
 void CyphalPublisher::setPortId(CanardPortID port_id) {
     transfer_metadata.port_id = port_id;
