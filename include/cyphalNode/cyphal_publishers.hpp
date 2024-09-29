@@ -18,19 +18,9 @@ class Cyphal;
 
 class CyphalPublisher {
 public:
-    CyphalPublisher(Cyphal* driver_, CanardPortID port_id_) : driver(driver_) {
+    CyphalPublisher();
+    CyphalPublisher(Cyphal* driver_, CanardPortID port_id_);
 
-        transfer_metadata.priority = CanardPriorityNominal;
-        transfer_metadata.transfer_kind = CanardTransferKindMessage;
-        transfer_metadata.port_id = port_id_;
-        transfer_metadata.remote_node_id = CANARD_NODE_ID_UNSET;
-        transfer_metadata.transfer_id = 0;
-
-        if (publishers_amount < MAX_PUB_NUM) {
-            publishers[publishers_amount] = this;
-            publishers_amount++;
-        }
-    }
     void setPortId(CanardPortID port_id);
     CanardPortID getPortId() const;
     bool isEnabled() const;
