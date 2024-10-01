@@ -18,7 +18,7 @@
 namespace cyphal {
 
 #ifndef CYPHAL_HEAP_SIZE
-    #define CYPHAL_HEAP_SIZE (1024*10)
+    #define CYPHAL_HEAP_SIZE (1024*8)
 #endif
 
 inline constexpr size_t HEAP_SIZE                       = CYPHAL_HEAP_SIZE;
